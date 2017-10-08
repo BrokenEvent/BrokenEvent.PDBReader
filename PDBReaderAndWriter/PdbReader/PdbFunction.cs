@@ -9,17 +9,17 @@ using System.Collections.Generic;
 
 namespace Microsoft.Cci.Pdb {
   public class PdbFunction {
-    static internal readonly Guid msilMetaData = new Guid(0xc6ea3fc9, 0x59b3, 0x49d6, 0xbc, 0x25,
+    internal static readonly Guid msilMetaData = new Guid(0xc6ea3fc9, 0x59b3, 0x49d6, 0xbc, 0x25,
                                                         0x09, 0x02, 0xbb, 0xab, 0xb4, 0x60);
-    static internal readonly IComparer byAddress = new PdbFunctionsByAddress();
-    static internal readonly IComparer byAddressAndToken = new PdbFunctionsByAddressAndToken();
+    internal static readonly IComparer byAddress = new PdbFunctionsByAddress();
+    internal static readonly IComparer byAddressAndToken = new PdbFunctionsByAddressAndToken();
     //static internal readonly IComparer byToken = new PdbFunctionsByToken();
 
     internal uint token;
     internal uint slotToken;
     internal uint tokenOfMethodWhoseUsingInfoAppliesToThisMethod;
-    //internal string name;
-    //internal string module;
+    internal string name;
+    internal string module;
     //internal ushort flags;
 
     internal uint segment;
@@ -47,10 +47,10 @@ namespace Microsoft.Cci.Pdb {
     }
 
 
-    internal static PdbFunction[] LoadManagedFunctions(/*string module,*/
+    internal static PdbFunction[] LoadManagedFunctions(string module,
                                                        BitAccess bits, uint limit,
                                                        bool readStrings) {
-      //string mod = StripNamespace(module);
+      string mod = StripNamespace(module);
       int begin = bits.Position;
       int count = 0;
 
@@ -128,7 +128,7 @@ namespace Microsoft.Cci.Pdb {
             //Console.WriteLine("token={0:X8} [{1}::{2}]", proc.token, module, proc.name);
 
             bits.Position = stop;
-            funcs[func++] = new PdbFunction(/*module,*/ proc, bits);
+            funcs[func++] = new PdbFunction(module, proc, bits);
             break;
 
           default: {
@@ -196,10 +196,10 @@ namespace Microsoft.Cci.Pdb {
     internal PdbFunction() {
     }
 
-    internal PdbFunction(/*string module, */ManProcSym proc, BitAccess bits) {
+    internal PdbFunction(string module, ManProcSym proc, BitAccess bits) {
       this.token = proc.token;
-      //this.module = module;
-      //this.name = proc.name;
+      this.module = module;
+      this.name = proc.name;
       //this.flags = proc.flags;
       this.segment = proc.seg;
       this.address = proc.off;

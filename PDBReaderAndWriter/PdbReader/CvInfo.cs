@@ -3,6 +3,7 @@
 
 using System;
 
+#pragma warning disable CS0649
 namespace Microsoft.Cci.Pdb {
   internal struct FLOAT10 {
     internal byte Data_0;
@@ -2407,3 +2408,4 @@ namespace Microsoft.Cci.Pdb {
     FRAMEDATA=0xF5,
   }
 }
+#pragma warning restore CS0649
