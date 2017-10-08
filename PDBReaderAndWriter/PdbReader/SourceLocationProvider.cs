@@ -5,7 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+#if !BROKENEVENT_FORK
 using Microsoft.Cci.MetadataReader;
+#endif
 
 #pragma warning disable 1591 // TODO: doc comments
 
@@ -13,6 +15,7 @@ namespace Microsoft.Cci {
   using Microsoft.Cci.Pdb;
   using System.Diagnostics.Contracts;
 
+#if !BROKENEVENT_FORK
   /// <summary>
   /// An object that can map offsets in an IL stream to source locations and block scopes.
   /// </summary>
@@ -719,12 +722,16 @@ namespace Microsoft.Cci.Pdb {
 
     #endregion
   }
+#endif
 
   /// <summary>
   /// A primary source document that is referenced by a pdb file and that is used to provide source context to lines from compiled CLR modules with
   /// associated PDB files.
   /// </summary>
-  internal sealed class PdbSourceDocument : PrimarySourceDocument {
+  internal sealed class PdbSourceDocument
+#if !BROKENEVENT_FORK
+    : PrimarySourceDocument
+  {
 
     /// <summary>
     /// Allocates an object that represents a source document, such as file, which is parsed according to the rules of a particular langauge, 
@@ -750,8 +757,11 @@ namespace Microsoft.Cci.Pdb {
     }
 
     PdbSource pdbSourceFile;
+#else
+  { 
+#endif
 
-    static Dictionary<Guid, string> sourceLanguageGuidToName = new Dictionary<Guid, string>()
+    internal static Dictionary<Guid, string> sourceLanguageGuidToName = new Dictionary<Guid, string>()
     {
         { new Guid(1671464724, -969, 4562, 144, 76, 0, 192, 79, 163, 2, 161),       "C"         },
         { new Guid(974311607, -15764, 4560, 180, 66, 0, 160, 36, 74, 29, 210),      "C++"       },
@@ -765,6 +775,7 @@ namespace Microsoft.Cci.Pdb {
         { new Guid(228302715, 26129, 4563, 189, 42, 0, 0, 248, 8, 73, 189),         "SMC"       },
         { new Guid(1261829608, 1990, 4563, 144, 83, 0, 192, 79, 163, 2, 161),       "MC++"      },
     };
+#if !BROKENEVENT_FORK
 
     public override string SourceLanguage {
       get {
@@ -795,7 +806,6 @@ namespace Microsoft.Cci.Pdb {
     public override byte[] Checksum {
         get { return this.pdbSourceFile.checksum; }
     }
-
   }
 
   /// <summary>
@@ -1204,6 +1214,7 @@ namespace Microsoft.Cci.Pdb {
     /// </summary>
     public IMethodDefinition MethodDefinition { get { return this.methodBody.MethodDefinition; } }
 
+#endif
   }
 
 }

@@ -112,9 +112,15 @@
     <Compile Include="..\PDBReaderAndWriter\PdbReader\PdbTokenLine.cs">
       <Link>Microsoft.PdbReader\PdbTokenLine.cs</Link>
     </Compile>
+    <Compile Include="..\PDBReaderAndWriter\PdbReader\SourceLocationProvider.cs">
+      <Link>Microsoft.PdbReader\SourceLocationProvider.cs</Link>
+    </Compile>
+    <Compile Include="CodeLocation.cs" />
     <Compile Include="Microsoft.PdbReader\Dummies\Interfaces.cs" />
     <Compile Include="Microsoft.PdbReader\Dummies\PdbIteratorScope.cs" />
     <Compile Include="Microsoft.PdbReader\Dummies\PdbSynchronizationInformation.cs" />
+    <Compile Include="PdbMethod.cs" />
+    <Compile Include="PdbResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
