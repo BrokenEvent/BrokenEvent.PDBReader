@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 
 using Microsoft.Cci;
@@ -7,11 +8,18 @@ using Microsoft.Cci.Pdb;
 
 namespace BrokenEvent.PDBReader
 {
+  /// <summary>
+  /// Entry point of the PDB reader lib. Used to resolve code file:line from class and method names.{
+  /// </summary>
   public class PdbResolver
   {
     private PdbInfo info;
     private readonly Dictionary<string, Dictionary<string, PdbMethod>> functionsMap = new Dictionary<string, Dictionary<string, PdbMethod>>();
 
+    /// <summary>
+    /// Creates instance of PdbResolver from stream.
+    /// </summary>
+    /// <param name="stream">Stream to load symbol data from</param>
     public PdbResolver(Stream stream)
     {
       if (stream == null)
@@ -20,6 +28,10 @@ namespace BrokenEvent.PDBReader
       LoadFunctionsInfo(stream);
     }
 
+    /// <summary>
+    /// Creates instance of PdbResolver from file.
+    /// </summary>
+    /// <param name="filename">File to load symbol data from</param>
     public PdbResolver(string filename)
     {
       if (filename == null)
@@ -27,6 +39,30 @@ namespace BrokenEvent.PDBReader
 
       using (FileStream stream = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.Read))
         LoadFunctionsInfo(stream);
+    }
+
+    /// <summary>
+    /// Age of the PDB file is used to match the PDB against the PE binary.
+    /// </summary>
+    public int PdbAge
+    {
+      get { return info.Age; }
+    }
+
+    /// <summary>
+    /// GUID of the PDB file is used to match the PDB against the PE binary.
+    /// </summary>
+    public Guid PdbGuid
+    {
+      get { return info.Guid; }
+    }
+
+    /// <summary>
+    /// Source server data information.
+    /// </summary>
+    public string SourceServerData
+    {
+      get { return info.SourceServerData; }
     }
 
     private void LoadFunctionsInfo(Stream stream)
@@ -56,11 +92,24 @@ namespace BrokenEvent.PDBReader
       return moduleMap.TryGetValue(methodName, out result) ? result : null;
     }
 
+    /// <summary>
+    /// Finds a location of method first line
+    /// </summary>
+    /// <param name="classname">Class name with namespace (i.e. "MyNamespace.MyClass")</param>
+    /// <param name="methodName">Name of method (i.e. "MyMethod")</param>
+    /// <returns>Code location or null if not found.</returns>
     public CodeLocation FindLocation(string classname, string methodName)
     {
       return FindLocation(classname, methodName, 0);
     }
 
+    /// <summary>
+    /// Finds a location of code.
+    /// </summary>
+    /// <param name="classname">Class name with namespace (i.e. "MyNamespace.MyClass")</param>
+    /// <param name="methodName">Name of method (i.e. "MyMethod")</param>
+    /// <param name="ilOffset">IL offset of code to get line for. See <see cref="StackFrame.GetILOffset"/></param>
+    /// <returns>Code location or null if not found.</returns>
     public CodeLocation FindLocation(string classname, string methodName, uint ilOffset)
     {
       if (classname == null)

@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrokenEvent.PDBReader", "BrokenEvent.PDBReader\BrokenEvent.PDBReader.csproj", "{65A50051-BFB8-4F13-A609-4056343E4D45}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrokenEvent.PDBReader.TestLib", "BrokenEvent.PDBReader.TestLib\BrokenEvent.PDBReader.TestLib.csproj", "{8700BC2B-7A83-460A-A3CE-731168282EC8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrokenEvent.PDBReader.Tests", "BrokenEvent.PDBReader.Tests\BrokenEvent.PDBReader.Tests.csproj", "{8DC6AE68-2729-4D37-B4C3-B57CC4770126}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{65A50051-BFB8-4F13-A609-4056343E4D45}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65A50051-BFB8-4F13-A609-4056343E4D45}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65A50051-BFB8-4F13-A609-4056343E4D45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8700BC2B-7A83-460A-A3CE-731168282EC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8700BC2B-7A83-460A-A3CE-731168282EC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8700BC2B-7A83-460A-A3CE-731168282EC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8700BC2B-7A83-460A-A3CE-731168282EC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DC6AE68-2729-4D37-B4C3-B57CC4770126}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DC6AE68-2729-4D37-B4C3-B57CC4770126}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DC6AE68-2729-4D37-B4C3-B57CC4770126}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DC6AE68-2729-4D37-B4C3-B57CC4770126}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

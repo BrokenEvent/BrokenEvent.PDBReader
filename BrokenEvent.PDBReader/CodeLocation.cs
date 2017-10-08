@@ -28,6 +28,7 @@
     /// </summary>
     public string Language { get; private set; }
 
+    /// <inheritdoc />
     public override string ToString()
     {
       return FileName + ":" + Line;
