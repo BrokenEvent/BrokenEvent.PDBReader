@@ -18,7 +18,7 @@ namespace Microsoft.Cci.Pdb {
     internal PdbScope(uint address, uint offset, uint length, PdbSlot[] slots, PdbConstant[] constants, string[] usedNamespaces) {
       this.constants = constants;
       this.slots = slots;
-      this.scopes = ArrayT<PdbScope>.Empty;
+      this.scopes = new PdbScope[0];
       this.usedNamespaces = usedNamespaces;
       this.address = address;
       this.offset = offset;
@@ -42,10 +42,10 @@ namespace Microsoft.Cci.Pdb {
       int slotCount;
       int namespaceCount;
       PdbFunction.CountScopesAndSlots(bits, block.end, out constantCount, out scopeCount, out slotCount, out namespaceCount);
-      constants = ArrayT<PdbConstant>.Create(constantCount);
-      scopes = ArrayT<PdbScope>.Create(scopeCount);
-      slots = ArrayT<PdbSlot>.Create(slotCount);
-      usedNamespaces = ArrayT<string>.Create(namespaceCount);
+      constants = new PdbConstant[constantCount];
+      scopes = new PdbScope[scopeCount];
+      slots = new PdbSlot[slotCount];
+      usedNamespaces = new string[namespaceCount];
       int constant = 0;
       int scope = 0;
       int slot = 0;

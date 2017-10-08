@@ -226,10 +226,10 @@ namespace Microsoft.Cci.Pdb {
       int slot = 0;
       int constant = 0;
       int usedNs = 0;
-      scopes = ArrayT<PdbScope>.Create(scopeCount+scope);
-      slots = ArrayT<PdbSlot>.Create(slotCount);
-      constants = ArrayT<PdbConstant>.Create(constantCount);
-      usedNamespaces = ArrayT<string>.Create(usedNamespacesCount);
+      scopes = new PdbScope[scopeCount+scope];
+      slots = new PdbSlot[slotCount];
+      constants = new PdbConstant[constantCount];
+      usedNamespaces = new string[usedNamespacesCount];
 
       if (scope > 0)
         scopes[0] = new PdbScope(this.address, proc.len, slots, constants, usedNamespaces);
@@ -461,6 +461,7 @@ namespace Microsoft.Cci.Pdb {
     //}
   }
 
+#if !BROKENEVENT_FORK
   public class PdbSynchronizationInformation : ISynchronizationInformation {
     internal uint kickoffMethodToken;
     internal IMethodDefinition asyncMethod;
@@ -552,5 +553,6 @@ namespace Microsoft.Cci.Pdb {
       get { return this.continuationOffset; }
     }
   }
+#endif
 
 }
