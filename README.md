@@ -1,11 +1,7 @@
-# Common Compiler Infrastructure (CCI)
+Fork from [https://github.com/Microsoft/cci](github.com/Microsoft/cci)
 
-## IMPORTANT
-Moving forward, there will only be servicing investments in CCI to support existing uses. New projects that need related functionality should look to the following instead:
+# BrokenEvent.PDBReader
 
-* [Roslyn](https://github.com/dotnet/roslyn) 
-* [Mono.Cecil](https://github.com/jbevain/cecil)
-* [System.Reflection.Metadata](https://github.com/dotnet/corefx)
+## About This Fork
 
-## GitHub vs. CodePlex
-This GitHub repository is the new central location for CCI and will replace https://ccimetadata.codeplex.com and https://cciast.codeplex.com.
+The goal is creation of a convenient interface for PDB reading and filename:line resolving. Microsoft.cci.pdb supports it, but the features are hidden with strange interface and partially commented.
