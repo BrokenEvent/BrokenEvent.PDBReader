@@ -9,7 +9,7 @@ using Microsoft.Cci.Pdb;
 namespace BrokenEvent.PDBReader
 {
   /// <summary>
-  /// Entry point of the PDB reader lib. Used to resolve code file:line from class and method names.{
+  /// Entry point of the PDB reader lib. Used to resolve code file:line from class and method names.
   /// </summary>
   public class PdbResolver
   {
@@ -98,6 +98,9 @@ namespace BrokenEvent.PDBReader
     /// <param name="classname">Class name with namespace (i.e. "MyNamespace.MyClass")</param>
     /// <param name="methodName">Name of method (i.e. "MyMethod")</param>
     /// <returns>Code location or null if not found.</returns>
+    /// <example>
+    /// <code>CodeLocation location = FindLocation("BrokenEvent.PDBReader.PdbResolver", "FindLocation")</code>
+    /// </example>
     public CodeLocation FindLocation(string classname, string methodName)
     {
       return FindLocation(classname, methodName, 0);
@@ -110,6 +113,9 @@ namespace BrokenEvent.PDBReader
     /// <param name="methodName">Name of method (i.e. "MyMethod")</param>
     /// <param name="ilOffset">IL offset of code to get line for. See <see cref="StackFrame.GetILOffset"/></param>
     /// <returns>Code location or null if not found.</returns>
+    /// <example>
+    /// <code>CodeLocation location = FindLocation("BrokenEvent.PDBReader.PdbResolver", "FindLocation", 10)</code>
+    /// </example>
     public CodeLocation FindLocation(string classname, string methodName, uint ilOffset)
     {
       if (classname == null)
